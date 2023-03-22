@@ -17,6 +17,7 @@ class TursoDB {
 	}
 
 	getName() {
+		if (!this.url.includes("@") || !this.url.includes("-")) return "Local DB";
 		return this.url.split("@").pop()?.split("-").shift() ?? "";
 	}
 }

@@ -21,6 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 				return res.status(400).json({ error: result.error?.message.split("(").shift() });
 			}
 		} catch (error: any) {
+			console.log("Query error:", error);
 			return res.status(400).json({ error: "Invalid query" });
 		}
 	}

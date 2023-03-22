@@ -25,14 +25,8 @@ const Homepage = () => {
 	const [isQueryLoading, setIsQueryLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
 	const [isQuerySaving, setIsQuerySaving] = useState<boolean>(false);
-	const [recentQueries, setRecentQueries] = useLocalStorageState<string[]>(
-		`${localUrl}-recentQueries`,
-		[]
-	);
-	const [savedQueries, setSavedQueries] = useLocalStorageState<string[]>(
-		`${localUrl}-savedQueries`,
-		[]
-	);
+	const [recentQueries, setRecentQueries] = useLocalStorageState<string[]>(`recentQueries`, []);
+	const [savedQueries, setSavedQueries] = useLocalStorageState<string[]>(`savedQueries`, []);
 	const [data, setData] = useState<{
 		columns: any[];
 		meta: { duration: number };
