@@ -8,9 +8,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Connec
 	const reqUrl = req.query.url;
 
 	if (typeof reqUrl === "string" && reqUrl) {
-		const db = new TursoDB(reqUrl);
-
-		return res.status(200).json({ name: db.getName() });
+		try {
+			const db = new TursoDB(reqUrl);
+			return res.status(200).json({ name: db.getName() });
+		} catch (error: any) {
+			return res.status(400).json({ error: error.message });
+		}
 	}
 
 	return res.status(400).json({ error: "Invalid URL" });

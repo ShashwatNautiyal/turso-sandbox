@@ -64,10 +64,12 @@ const Homepage = () => {
 	const handleConnect = async (url: string) => {
 		try {
 			setIsDBLoading(true);
+			setError("");
 			const res = await axios.get(`api/connect?url=${url}`);
 			setDbName(res.data.name);
-		} catch (error) {
+		} catch (error: any) {
 			setDbName("");
+			setError(error.response.data.error);
 			console.log(error);
 		} finally {
 			setIsDBLoading(false);

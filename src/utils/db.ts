@@ -1,11 +1,16 @@
 import { createClient, Client } from "@libsql/client";
+import DatabaseConstructor, { Database } from "better-sqlite3";
 
 class TursoDB {
-	private db: Client;
+	private db: any;
 	private url: string;
 	constructor(url: string) {
 		this.url = url;
-		this.db = createClient({ url });
+		if (!this.url.includes("@") || !this.url.includes("-")) {
+			throw new Error("You must provide a valid http URL");
+		} else {
+			this.db = createClient({ url });
+		}
 	}
 
 	async query(sql: string, params?: any) {
